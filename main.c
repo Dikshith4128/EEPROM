@@ -56,7 +56,7 @@ int main(void) {
     FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
     ...
   */
-
+  EEPROM_Print(0,64);
   EEPROM_InitWearLeveledByte(EE_VOLUME, volume);
   /*
     The initial byte (0x40) is now stored, and the
@@ -70,6 +70,7 @@ int main(void) {
     ...
   */
 
+  EEPROM_Print(0,64);
   EEPROM_InitWearLeveledBlock(EE_SETTINGS, &settings, sizeof(settings));
   /*
     The contents of the struct settings_t
@@ -97,6 +98,16 @@ int main(void) {
     ...
   */
 
+  EEPROM_Print(0,64);
+  volume++;
+  EEPROM_WriteWearLeveledByte(EE_VOLUME, volume);
+  EEPROM_Print(0,64);
+  volume++;
+  EEPROM_WriteWearLeveledByte(EE_VOLUME, volume);
+  EEPROM_Print(0,64);
+  volume++;
+  EEPROM_WriteWearLeveledByte(EE_VOLUME, volume);
+  EEPROM_Print(0,64);
   volume++;
   EEPROM_WriteWearLeveledByte(EE_VOLUME, volume);
   /*
