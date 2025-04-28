@@ -1,0 +1,42 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CC	Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-Wall -std=gnu99 -O3$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS=$(EEPROM_DEFINES)$/;"	m
+EEPROM_DEFINES	eeprom.mk	/^EEPROM_DEFINES = -DEEPROM_WEAR_LEVEL_FACTOR=$(EEPROM_WEAR_LEVEL_FACTOR) \\$/;"	m
+EEPROM_FindCurrentAddress	eeprom.c	/^static uint16_t EEPROM_FindCurrentAddress(const uint16_t param) {$/;"	f	file:
+EEPROM_INCLUDE_BLOCK_FUNCS	eeprom.mk	/^EEPROM_INCLUDE_BLOCK_FUNCS = 1$/;"	m
+EEPROM_INCLUDE_BYTE_FUNCS	eeprom.mk	/^EEPROM_INCLUDE_BYTE_FUNCS = 1$/;"	m
+EEPROM_InitWearLeveledBlock	eeprom.c	/^void EEPROM_InitWearLeveledBlock(const uint16_t param, const void *data, const uint16_t len) {$/;"	f
+EEPROM_InitWearLeveledByte	eeprom.c	/^uint8_t EEPROM_InitWearLeveledByte(const uint16_t param, const uint8_t data) {$/;"	f	file:
+EEPROM_Print	eeprom.c	/^void EEPROM_Print(const uint16_t begin, const uint16_t end) {$/;"	f
+EEPROM_Read	eeprom.c	43;"	d	file:
+EEPROM_Read	eeprom.c	48;"	d	file:
+EEPROM_ReadWearLeveledBlock	eeprom.c	/^void EEPROM_ReadWearLeveledBlock(const uint16_t param, void *data, const uint16_t len) {$/;"	f
+EEPROM_ReadWearLeveledByte	eeprom.c	/^uint8_t EEPROM_ReadWearLeveledByte(const uint16_t param) {$/;"	f	file:
+EEPROM_SIMULATED_SIZE	eeprom.mk	/^EEPROM_SIMULATED_SIZE = 512$/;"	m
+EEPROM_WEAR_LEVEL_FACTOR	eeprom.mk	/^EEPROM_WEAR_LEVEL_FACTOR = 8$/;"	m
+EEPROM_Write	eeprom.c	44;"	d	file:
+EEPROM_Write	eeprom.c	49;"	d	file:
+EEPROM_WriteWearLeveledBlock	eeprom.c	/^void EEPROM_WriteWearLeveledBlock(const uint16_t param, const void *data, const uint16_t len) {$/;"	f
+EEPROM_WriteWearLeveledByte	eeprom.c	/^void EEPROM_WriteWearLeveledByte(const uint16_t param, const uint8_t data) {$/;"	f	file:
+EE_EEPROM_END	main.c	46;"	d	file:
+EE_PARAM_BUFFER_SIZE	eeprom.c	38;"	d	file:
+EE_SETTINGS	main.c	45;"	d	file:
+EE_STATUS_BUFFER_SIZE	eeprom.c	39;"	d	file:
+EE_VOLUME	main.c	44;"	d	file:
+EXECUTABLE	Makefile	/^EXECUTABLE=main$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS=$/;"	m
+OBJECTS	Makefile	/^OBJECTS=main.o eeprom.o$/;"	m
+SOURCESS	Makefile	/^SOURCESS=$(OBJECTS:.o=.c)$/;"	m
+eeprom	eeprom.c	/^uint8_t eeprom[EEPROM_SIMULATED_SIZE] = { [0 ... EEPROM_SIMULATED_SIZE - 1] = 0xFF };$/;"	v
+level	main.c	/^  uint8_t level;$/;"	m	struct:settings_t	file:
+main	main.c	/^int main(void) {$/;"	f
+score	main.c	/^  uint16_t score;$/;"	m	struct:settings_t	file:
+settings	main.c	/^struct settings_t settings = {0x00FD, 0x01};$/;"	v	typeref:struct:settings_t
+settings_t	main.c	/^struct __attribute__ ((__packed__)) settings_t {$/;"	s	file:
+volume	main.c	/^uint8_t volume = 0x40;$/;"	v
