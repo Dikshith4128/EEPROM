@@ -6,7 +6,7 @@
 # each wear-leveled byte is EEPROM_WEAR_LEVEL_FACTOR * 2.
 #
 # Note: Eight levels will guarantee 800k writes.
-EEPROM_WEAR_LEVEL_FACTOR = 8
+EEPROM_WEAR_LEVEL_FACTOR = 4
 
 # Flag for including functions for wear-leveling arbitrarily sized
 # blocks of memory, rather than just single bytes.
