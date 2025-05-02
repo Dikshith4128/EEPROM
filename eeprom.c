@@ -55,7 +55,6 @@ void EEPROM_Print(const uint16_t begin, const uint16_t end) {
   printf("-----------------------------------------------\n");
 }
 #endif // F_CPU
-
 static uint16_t EEPROM_FindCurrentAddress(const uint16_t param) {
   uint16_t EeBufPtr = param + EE_PARAM_BUFFER_SIZE; // point to the status buffer
   uint16_t EeBufEnd = EeBufPtr + EE_STATUS_BUFFER_SIZE; // the first address outside the buffer

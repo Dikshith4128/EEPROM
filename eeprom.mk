@@ -6,8 +6,19 @@
 # each wear-leveled byte is EEPROM_WEAR_LEVEL_FACTOR * 2.
 #
 # Note: Eight levels will guarantee 800k writes.
-EEPROM_WEAR_LEVEL_FACTOR = 4
+EEPROM_START_ADDRESS = 0
+EEPROM_DATA = 40
+EEPROM_WEAR_LEVEL_FACTOR = 8
 
+# Note: Eight levels will guarantee 400k writes.
+EEPROM_START_ADDRESS_B4 = 64
+EEPROM_DATA_B4 = 20
+EEPROM_WEAR_LEVEL_FACTOR_B4 = 4
+
+# Note: Eight levels will guarantee 200k writes.
+EEPROM_START_ADDRESS_B2 = 128
+EEPROM_DATA_B2 = 10
+EEPROM_WEAR_LEVEL_FACTOR_B2 = 2
 # Flag for including functions for wear-leveling arbitrarily sized
 # blocks of memory, rather than just single bytes.
 #  0 = Do not include functions for operating on blocks of memory
@@ -50,6 +61,14 @@ endif
 #     $(EEPROM_DEFINES)
 # which should be appended to the definition of COMPILE in the Makefile
 EEPROM_DEFINES = -DEEPROM_WEAR_LEVEL_FACTOR=$(EEPROM_WEAR_LEVEL_FACTOR) \
+                 -DEEPROM_WEAR_LEVEL_FACTOR_B4=$(EEPROM_WEAR_LEVEL_FACTOR_B4) \
+                 -DEEPROM_WEAR_LEVEL_FACTOR_B2=$(EEPROM_WEAR_LEVEL_FACTOR_B2) \
+                 -DEEPROM_DATA=$(EEPROM_DATA) \
+                 -DEEPROM_DATA_B4=$(EEPROM_DATA_B4) \
+                 -DEEPROM_DATA_B2=$(EEPROM_DATA_B2) \
+                 -DEEPROM_START_ADDRESS=$(EEPROM_START_ADDRESS) \
+                 -DEEPROM_START_ADDRESS_B4=$(EEPROM_START_ADDRESS_B4) \
+                 -DEEPROM_START_ADDRESS_B2=$(EEPROM_START_ADDRESS_B2) \
                  -DEEPROM_INCLUDE_BLOCK_FUNCS=$(EEPROM_INCLUDE_BLOCK_FUNCS) \
                  -DEEPROM_INCLUDE_BYTE_FUNCS=$(EEPROM_INCLUDE_BYTE_FUNCS) \
                  -DEEPROM_SIMULATED_SIZE=$(EEPROM_SIMULATED_SIZE)
