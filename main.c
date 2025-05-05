@@ -44,6 +44,9 @@ struct settings_t settings = {0x00FD, 0x01};
 
 // EEPROM parameter offsets (EE_EPROM_END should be defined before including eeprom.h)
 #define EE_VOLUME     EEPROM_START_ADDRESS
+#define EEPROM_EFFECTIVE(x) ((x) == 0 ? 32 : (x))
+#define EEPROM_END_ADDRESS  (EEPROM_EFFECTIVE(EEPROM_START_ADDRESS) * 2)
+
 #define EE_SETTINGS   (EE_VOLUME + sizeof(volume) * EEPROM_WEAR_LEVEL_FACTOR * 2)
 #define EE_EEPROM_END (EE_SETTINGS + sizeof(struct settings_t) * EEPROM_WEAR_LEVEL_FACTOR * 2)
 #include "eeprom.h"
@@ -58,7 +61,7 @@ int main(void) {
     FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
     ...
   */
-  EEPROM_Print(0,64);
+  EEPROM_Print(EEPROM_START_ADDRESS,EEPROM_END_ADDRESS);
   EEPROM_InitWearLeveledByte(EE_VOLUME,volume);
   /*
     The initial byte (0x40) is now stored, and the
@@ -72,7 +75,7 @@ int main(void) {
     ...
   */
 
-  EEPROM_Print(0,64);
+  EEPROM_Print(EEPROM_START_ADDRESS,EEPROM_END_ADDRESS);
   EEPROM_InitWearLeveledBlock(EE_SETTINGS, &settings, sizeof(settings));
   /*
     The contents of the struct settings_t
@@ -100,16 +103,16 @@ int main(void) {
     ...
   */
 
-  EEPROM_Print(0,64);
+  EEPROM_Print(EEPROM_START_ADDRESS,EEPROM_END_ADDRESS);
   volume++;
   EEPROM_WriteWearLeveledByte(EE_VOLUME, volume);
-  EEPROM_Print(0,64);
+  EEPROM_Print(EEPROM_START_ADDRESS,EEPROM_END_ADDRESS);
   volume++;
   EEPROM_WriteWearLeveledByte(EE_VOLUME, volume);
-  EEPROM_Print(0,64);
+  EEPROM_Print(EEPROM_START_ADDRESS,EEPROM_END_ADDRESS);
   volume++;
   EEPROM_WriteWearLeveledByte(EE_VOLUME, volume);
-  EEPROM_Print(0,64);
+  EEPROM_Print(EEPROM_START_ADDRESS,EEPROM_END_ADDRESS);
   volume++;
   EEPROM_WriteWearLeveledByte(EE_VOLUME, volume);
   /*

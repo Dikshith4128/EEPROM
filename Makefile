@@ -5,13 +5,16 @@
 
 CC=gcc
 CFLAGS=-Wall -std=gnu99 -O3
+
+EEPROM_PROFILE ?= WL8
+include eeprom.mk
+
 CPPFLAGS=$(EEPROM_DEFINES)
 LDFLAGS=
 OBJECTS=main.o eeprom.o
 SOURCESS=$(OBJECTS:.o=.c)
 EXECUTABLE=main
 
-include eeprom.mk
 
 all: $(SOURCES) $(EXECUTABLE)
 

@@ -6,20 +6,27 @@
 # each wear-leveled byte is EEPROM_WEAR_LEVEL_FACTOR * 2.
 #
 # Note: Eight levels will guarantee 800k writes.
-EEPROM_START_ADDRESS = 0
-EEPROM_DATA = 0x40
-EEPROM_WEAR_LEVEL_FACTOR = 8
-
-# Note: Eight levels will guarantee 400k writes.
-EEPROM_START_ADDRESS_B4 = 64
-EEPROM_DATA_B4 = 0x20
-EEPROM_WEAR_LEVEL_FACTOR_B4 = 4
-
-# Note: Eight levels will guarantee 200k writes.
-EEPROM_START_ADDRESS_B2 = 128
-EEPROM_DATA_B2 = 0x10
-EEPROM_WEAR_LEVEL_FACTOR_B2 = 2
 # Flag for including functions for wear-leveling arbitrarily sized
+EEPROM_PROFILE ?= WL8  # Default profile
+
+ifeq ($(EEPROM_PROFILE), WL8)
+  EEPROM_START_ADDRESS = 0
+  EEPROM_DATA = 0x40
+  EEPROM_WEAR_LEVEL_FACTOR = 8
+endif
+
+ifeq ($(EEPROM_PROFILE), WL4)
+  EEPROM_START_ADDRESS = 64
+  EEPROM_DATA = 0x20
+  EEPROM_WEAR_LEVEL_FACTOR = 4
+endif
+
+ifeq ($(EEPROM_PROFILE), WL2)
+  EEPROM_START_ADDRESS = 128
+  EEPROM_DATA = 0x10
+  EEPROM_WEAR_LEVEL_FACTOR = 2
+endif
+
 # blocks of memory, rather than just single bytes.
 #  0 = Do not include functions for operating on blocks of memory
 #  1 = Include functions for operating on blocks of memory
@@ -61,14 +68,8 @@ endif
 #     $(EEPROM_DEFINES)
 # which should be appended to the definition of COMPILE in the Makefile
 EEPROM_DEFINES = -DEEPROM_WEAR_LEVEL_FACTOR=$(EEPROM_WEAR_LEVEL_FACTOR) \
-                 -DEEPROM_WEAR_LEVEL_FACTOR_B4=$(EEPROM_WEAR_LEVEL_FACTOR_B4) \
-                 -DEEPROM_WEAR_LEVEL_FACTOR_B2=$(EEPROM_WEAR_LEVEL_FACTOR_B2) \
                  -DEEPROM_DATA=$(EEPROM_DATA) \
-                 -DEEPROM_DATA_B4=$(EEPROM_DATA_B4) \
-                 -DEEPROM_DATA_B2=$(EEPROM_DATA_B2) \
                  -DEEPROM_START_ADDRESS=$(EEPROM_START_ADDRESS) \
-                 -DEEPROM_START_ADDRESS_B4=$(EEPROM_START_ADDRESS_B4) \
-                 -DEEPROM_START_ADDRESS_B2=$(EEPROM_START_ADDRESS_B2) \
                  -DEEPROM_INCLUDE_BLOCK_FUNCS=$(EEPROM_INCLUDE_BLOCK_FUNCS) \
                  -DEEPROM_INCLUDE_BYTE_FUNCS=$(EEPROM_INCLUDE_BYTE_FUNCS) \
                  -DEEPROM_SIMULATED_SIZE=$(EEPROM_SIMULATED_SIZE)
