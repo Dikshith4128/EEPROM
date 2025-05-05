@@ -7,17 +7,17 @@
 #
 # Note: Eight levels will guarantee 800k writes.
 EEPROM_START_ADDRESS = 0
-EEPROM_DATA = 40
+EEPROM_DATA = 0x40
 EEPROM_WEAR_LEVEL_FACTOR = 8
 
 # Note: Eight levels will guarantee 400k writes.
 EEPROM_START_ADDRESS_B4 = 64
-EEPROM_DATA_B4 = 20
+EEPROM_DATA_B4 = 0x20
 EEPROM_WEAR_LEVEL_FACTOR_B4 = 4
 
 # Note: Eight levels will guarantee 200k writes.
 EEPROM_START_ADDRESS_B2 = 128
-EEPROM_DATA_B2 = 10
+EEPROM_DATA_B2 = 0x10
 EEPROM_WEAR_LEVEL_FACTOR_B2 = 2
 # Flag for including functions for wear-leveling arbitrarily sized
 # blocks of memory, rather than just single bytes.

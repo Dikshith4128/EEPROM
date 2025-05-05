@@ -20,3 +20,5 @@ clean:
 
 $(EXECUTABLE): $(OBJECTS)
 	$(LINK.c) $(OBJECTS) -o $@ $(LDFLAGS)
+
+rebuild: clean all

@@ -35,7 +35,7 @@
 #include "eeprom.h"
 
 // Define the number of levels in the buffer (8 levels will guarantee 800k writes)
-#define EE_PARAM_BUFFER_SIZE  EEPROM_WEAR_LEVEL_FACTOR
+#define EE_PARAM_BUFFER_SIZE  EEPROM_WEAR_LEVEL_FACTOR_B2
 #define EE_STATUS_BUFFER_SIZE  EE_PARAM_BUFFER_SIZE
 
 #ifdef F_CPU

@@ -59,7 +59,7 @@ int main(void) {
     ...
   */
   EEPROM_Print(0,64);
-  EEPROM_InitWearLeveledByte(EE_VOLUME, volume);
+  EEPROM_InitWearLeveledByte(EE_VOLUME,volume);
   /*
     The initial byte (0x40) is now stored, and the
     wear-leveling metadata for that byte has been
