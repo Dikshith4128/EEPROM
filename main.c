@@ -34,7 +34,7 @@
 #include <stdio.h>
 
 
-uint8_t volume = 0x40;
+uint8_t volume = EEPROM_DATA;
 
 struct __attribute__ ((__packed__)) settings_t {
   uint16_t score;
@@ -43,7 +43,7 @@ struct __attribute__ ((__packed__)) settings_t {
 struct settings_t settings = {0x00FD, 0x01};
 
 // EEPROM parameter offsets (EE_EPROM_END should be defined before including eeprom.h)
-#define EE_VOLUME     0
+#define EE_VOLUME     EEPROM_START_ADDRESS
 #define EE_SETTINGS   (EE_VOLUME + sizeof(volume) * EEPROM_WEAR_LEVEL_FACTOR * 2)
 #define EE_EEPROM_END (EE_SETTINGS + sizeof(struct settings_t) * EEPROM_WEAR_LEVEL_FACTOR * 2)
 #include "eeprom.h"
