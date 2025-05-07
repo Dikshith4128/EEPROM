@@ -1,6 +1,7 @@
 /*
 
   eeprom.c
+  modify for multiple volumes
 
   Based on AVR101 "High endurance EEPROM storage" by jllassen
 
