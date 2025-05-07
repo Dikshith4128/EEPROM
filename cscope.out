@@ -1,0 +1,932 @@
+cscope 15 $HOME/Downloads/training/git_practice/eeprom -q 0000000058 0000006225
+	@eeprom.c
+
+35 
+	~"ì¥om.h
+"
+
+38 
+	#EE_PARAM_BUFFER_SIZE
+ 
+EEPROM_WEAR_LEVEL_FACTOR
+
+
+	)
+
+39 
+	#EE_STATUS_BUFFER_SIZE
+ 
+EE_PARAM_BUFFER_SIZE
+
+
+	)
+
+41 #ifde‡
+F_CPU
+
+
+42 
+	~<avr/ì¥om.h
+>
+
+43 
+	#EEPROM_Ród
+(
+addªss
+Ë
+	`ì¥om_ªad_byã
+((
+uöt8_t
+ *)(
+uöt16_t
+)◊ddªss))
+
+	)
+
+44 
+	#EEPROM_Wrôe
+(
+addªss
+, 
+d©a
+Ë
+	`ì¥om_upd©e_byã
+((
+uöt8_t
+ *)(
+uöt16_t
+)◊ddªss), (d©a))
+
+	)
+
+47 
+uöt8_t
+ 
+	gì¥om
+[
+EEPROM_SIMULATED_SIZE
+] = { [0 ... EEPROM_SIMULATED_SIZE - 1] = 0xFF };
+
+48 
+	#EEPROM_Ród
+(
+addªss
+Ë
+ì¥om
+[◊ddªss)]
+
+	)
+
+49 
+	#EEPROM_Wrôe
+(
+addªss
+, 
+d©a
+Ë
+ì¥om
+[◊ddªss)] = (d©a)
+
+	)
+
+50 
+	~<°dio.h
+>
+
+51 
+	$EEPROM_Pröt
+(c⁄° 
+uöt16_t
+ 
+begö
+, c⁄° uöt16_à
+íd
+) {
+
+52 
+	`¥ötf
+("-----------------------------------------------\n");
+
+53 
+uöt16_t
+ 
+i
+ = 
+begö
+; i < 
+íd
+; ++i)
+
+54 
+	`¥ötf
+("%02X %s", 
+ì¥om
+[
+i
+], (i + 1) % 16 ? "" : "\n");
+
+55 
+	`¥ötf
+("-----------------------------------------------\n");
+
+56 
+	}
+}
+
+58 
+uöt16_t
+ 
+	$EEPROM_FödCuºítAddªss
+(c⁄° 
+uöt16_t
+ 
+∑øm
+) {
+
+59 
+uöt16_t
+ 
+EeBufPå
+ = 
+∑øm
+ + 
+EE_PARAM_BUFFER_SIZE
+;
+
+60 
+uöt16_t
+ 
+EeBufEnd
+ = 
+EeBufPå
+ + 
+EE_STATUS_BUFFER_SIZE
+;
+
+63 
+uöt8_t
+ 
+tmp
+;
+
+65 
+tmp
+ = 
+	`EEPROM_Ród
+(
+EeBufPå
+);
+
+66 i‡(++
+EeBufPå
+ =
+EeBufEnd
+)
+
+68 } 
+	`EEPROM_Ród
+(
+EeBufPå
+Ë=(
+uöt8_t
+)(
+tmp
+ + 1));
+
+71  
+EeBufPå
+ - (
+EE_PARAM_BUFFER_SIZE
+ + 1);
+
+72 
+	}
+}
+
+74 #i‡(
+EEPROM_INCLUDE_BYTE_FUNCS
+ == 0)
+
+77 
+uöt8_t
+ 
+	$EEPROM_InôWórLevñedByã
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, c⁄° 
+uöt8_t
+ 
+d©a
+) {
+
+78 
+	`EEPROM_Wrôe
+(
+∑øm
+ + 
+EE_PARAM_BUFFER_SIZE
+, 
+EE_STATUS_BUFFER_SIZE
+ - 1);
+
+80 
+uöt8_t
+ 
+i
+ = 1; i < 
+EE_STATUS_BUFFER_SIZE
+; ++i)
+
+81 
+	`EEPROM_Wrôe
+(
+i
+ + 
+∑øm
+ + 
+EE_PARAM_BUFFER_SIZE
+, i - 1);
+
+83 
+	`EEPROM_Wrôe
+(
+∑øm
+, 
+d©a
+);
+
+84  
+d©a
+;
+
+85 
+	}
+}
+
+87 #i‡(
+EEPROM_INCLUDE_BYTE_FUNCS
+ == 0)
+
+90 
+uöt8_t
+ 
+	$EEPROM_RódWórLevñedByã
+(c⁄° 
+uöt16_t
+ 
+∑øm
+) {
+
+91  
+	`EEPROM_Ród
+(
+	`EEPROM_FödCuºítAddªss
+(
+∑øm
+));
+
+92 
+	}
+}
+
+94 #i‡(
+EEPROM_INCLUDE_BYTE_FUNCS
+ == 0)
+
+97 
+	$EEPROM_WrôeWórLevñedByã
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, c⁄° 
+uöt8_t
+ 
+d©a
+) {
+
+98 
+uöt16_t
+ 
+addªss
+ = 
+	`EEPROM_FödCuºítAddªss
+(
+∑øm
+);
+
+101 i‡(
+	`EEPROM_Ród
+(
+addªss
+Ë=
+d©a
+)
+
+105 
+uöt8_t
+ 
+ﬁdSètusVÆue
+ = 
+	`EEPROM_Ród
+(
+addªss
+ + 
+EE_PARAM_BUFFER_SIZE
+);
+
+108 i‡(++
+addªss
+ =
+∑øm
+ + 
+EE_PARAM_BUFFER_SIZE
+)
+
+109 
+addªss
+ = 
+∑øm
+;
+
+116 
+	`EEPROM_Wrôe
+(
+addªss
+, 
+d©a
+);
+
+119 
+	`EEPROM_Wrôe
+(
+addªss
+ + 
+EE_PARAM_BUFFER_SIZE
+, 
+ﬁdSètusVÆue
+ + 1);
+
+120 
+	}
+}
+
+122 #i‡(
+EEPROM_INCLUDE_BLOCK_FUNCS
+)
+
+123 
+	$EEPROM_InôWórLevñedBlock
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, c⁄° *
+d©a
+, c⁄° uöt16_à
+Àn
+) {
+
+124 
+uöt16_t
+ 
+i
+ = 0; i < 
+Àn
+; ++i)
+
+125 
+	`EEPROM_InôWórLevñedByã
+(
+∑øm
+ + 
+i
+ * (
+EE_PARAM_BUFFER_SIZE
+ + 
+EE_STATUS_BUFFER_SIZE
+),
+
+126 *(((
+uöt8_t
+ *)
+d©a
+Ë+ 
+i
+));
+
+127 
+	}
+}
+
+132 
+	$EEPROM_RódWórLevñedBlock
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, *
+d©a
+, c⁄° uöt16_à
+Àn
+) {
+
+133 
+uöt16_t
+ 
+i
+ = 0; i < 
+Àn
+; ++i)
+
+134 *(((
+uöt8_t
+ *)
+d©a
+Ë+ 
+i
+Ë
+	`EEPROM_RódWórLevñedByã
+(
+∑øm
+ + i * (
+EE_PARAM_BUFFER_SIZE
+
+
+135 + 
+EE_STATUS_BUFFER_SIZE
+));
+
+136 
+	}
+}
+
+142 
+	$EEPROM_WrôeWórLevñedBlock
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, c⁄° *
+d©a
+, c⁄° uöt16_à
+Àn
+) {
+
+143 
+uöt16_t
+ 
+i
+ = 0; i < 
+Àn
+; ++i)
+
+144 
+	`EEPROM_WrôeWórLevñedByã
+(
+∑øm
+ + 
+i
+ * (
+EE_PARAM_BUFFER_SIZE
+ + 
+EE_STATUS_BUFFER_SIZE
+),
+
+145 *(((
+uöt8_t
+ *)
+d©a
+Ë+ 
+i
+));
+
+146 
+	}
+}
+
+	@eeprom.h
+
+35 #¥agm®
+⁄˚
+
+
+37 
+	~<°döt.h
+>
+
+53 #ifde‡
+F_CPU
+
+
+54 
+	~<avr/io.h
+>
+
+63 #ifde‡
+EE_EEPROM_END
+
+
+64 
+_Sètic_as£π
+((
+EE_EEPROM_END
+ <
+E2END
+ + 1), "Available EEPROM memoryÉxceeded. Consider setting EEPROM_WEAR_LEVEL_FACTORÅoáÜower value.");
+
+68 
+uöt8_t
+ 
+ì¥om
+[
+EEPROM_SIMULATED_SIZE
+];
+
+69 #ifde‡
+EE_EEPROM_END
+
+
+70 
+_Sètic_as£π
+((
+EE_EEPROM_END
+ <(
+ì¥om
+)), "Available EEPROM memoryÉxceeded. Consider setting EEPROM_WEAR_LEVEL_FACTORÅoáÜower value.");
+
+85 
+EEPROM_Pröt
+(c⁄° 
+uöt16_t
+ 
+begö
+, c⁄° uöt16_à
+íd
+);
+
+88 #i‡(
+EEPROM_INCLUDE_BYTE_FUNCS
+)
+
+112 
+uöt8_t
+ 
+EEPROM_InôWórLevñedByã
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, c⁄° uöt8_à
+d©a
+);
+
+129 
+uöt8_t
+ 
+EEPROM_RódWórLevñedByã
+(c⁄° 
+uöt16_t
+ 
+∑øm
+);
+
+145 
+EEPROM_WrôeWórLevñedByã
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, c⁄° 
+uöt8_t
+ 
+d©a
+);
+
+148 #i‡(
+EEPROM_INCLUDE_BLOCK_FUNCS
+)
+
+173 
+EEPROM_InôWórLevñedBlock
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, c⁄° *
+d©a
+, c⁄° uöt16_à
+Àn
+);
+
+194 
+EEPROM_RódWórLevñedBlock
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, *
+d©a
+, c⁄° uöt16_à
+Àn
+);
+
+214 
+EEPROM_WrôeWórLevñedBlock
+(c⁄° 
+uöt16_t
+ 
+∑øm
+, c⁄° *
+d©a
+, c⁄° uöt16_à
+Àn
+);
+
+	@main.c
+
+33 
+	~<°döt.h
+>
+
+34 
+	~<°dio.h
+>
+
+37 
+uöt8_t
+ 
+	gvﬁume
+ = 
+EEPROM_DATA
+;
+
+39 
+__©åibuã__
+ ((
+__∑cked__
+)Ë
+	g£âögs_t
+ {
+
+40 
+uöt16_t
+ 
+	gsc‹e
+;
+
+41 
+uöt8_t
+ 
+	gÀvñ
+;
+
+43 
+£âögs_t
+ 
+	g£âögs
+ = {0x00FD, 0x01};
+
+46 
+	#EE_VOLUME
+ 
+EEPROM_START_ADDRESS
+
+
+	)
+
+47 
+	#EEPROM_EFFECTIVE
+(
+x
+Ë((xË=0 ? 32 : (x))
+
+	)
+
+48 
+	#EEPROM_END_ADDRESS
+ (
+	`EEPROM_EFFECTIVE
+(
+EEPROM_START_ADDRESS
+Ë* 2)
+
+	)
+
+50 
+	#EE_SETTINGS
+ (
+EE_VOLUME
+ + (
+vﬁume
+Ë* 
+EEPROM_WEAR_LEVEL_FACTOR
+ * 2)
+
+	)
+
+51 
+	#EE_EEPROM_END
+ (
+EE_SETTINGS
+ + (
+£âögs_t
+Ë* 
+EEPROM_WEAR_LEVEL_FACTOR
+ * 2)
+
+	)
+
+52 
+	~"ì¥om.h
+"
+
+54 
+	$maö
+() {
+
+64 
+	`EEPROM_Pröt
+(
+EEPROM_START_ADDRESS
+,
+EEPROM_END_ADDRESS
+);
+
+65 
+	`EEPROM_InôWórLevñedByã
+(
+EE_VOLUME
+,
+vﬁume
+);
+
+78 
+	`EEPROM_Pröt
+(
+EEPROM_START_ADDRESS
+,
+EEPROM_END_ADDRESS
+);
+
+79 
+	`EEPROM_InôWórLevñedBlock
+(
+EE_SETTINGS
+, &
+£âögs
+, (settings));
+
+93 
+vﬁume
+ = 
+	`EEPROM_RódWórLevñedByã
+(
+EE_VOLUME
+);
+
+94 
+	`EEPROM_RódWórLevñedBlock
+(
+EE_SETTINGS
+, &
+£âögs
+, (settings));
+
+106 
+	`EEPROM_Pröt
+(
+EEPROM_START_ADDRESS
+,
+EEPROM_END_ADDRESS
+);
+
+107 
+vﬁume
+++;
+
+108 
+	`EEPROM_WrôeWórLevñedByã
+(
+EE_VOLUME
+, 
+vﬁume
+);
+
+109 
+	`EEPROM_Pröt
+(
+EEPROM_START_ADDRESS
+,
+EEPROM_END_ADDRESS
+);
+
+110 
+vﬁume
+++;
+
+111 
+	`EEPROM_WrôeWórLevñedByã
+(
+EE_VOLUME
+, 
+vﬁume
+);
+
+112 
+	`EEPROM_Pröt
+(
+EEPROM_START_ADDRESS
+,
+EEPROM_END_ADDRESS
+);
+
+113 
+vﬁume
+++;
+
+114 
+	`EEPROM_WrôeWórLevñedByã
+(
+EE_VOLUME
+, 
+vﬁume
+);
+
+115 
+	`EEPROM_Pröt
+(
+EEPROM_START_ADDRESS
+,
+EEPROM_END_ADDRESS
+);
+
+116 
+vﬁume
+++;
+
+117 
+	`EEPROM_WrôeWórLevñedByã
+(
+EE_VOLUME
+, 
+vﬁume
+);
+
+131 
+£âögs
+.
+sc‹e
+++;
+
+132 
+	`EEPROM_WrôeWórLevñedBlock
+(
+EE_SETTINGS
+, &
+£âögs
+, (settings));
+
+149 
+£âögs
+.
+sc‹e
+++;
+
+150 
+	`EEPROM_WrôeWórLevñedBlock
+(
+EE_SETTINGS
+, &
+£âögs
+, (settings));
+
+168 
+£âögs
+.
+sc‹e
+++;
+
+169 
+	`EEPROM_WrôeWórLevñedBlock
+(
+EE_SETTINGS
+, &
+£âögs
+, (settings));
+
+187 
+	}
+}
+
+	@
+1
+.
+0
+3
+25
+eeprom.c
+eeprom.h
+main.c
