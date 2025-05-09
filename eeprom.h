@@ -32,9 +32,80 @@
 
 */
 
-#pragma once
+#ifndef __EEPROM_WL_VOL_H__
+#define __EEPROM_WL_VOL_H__
+
 
 #include <stdint.h>
+#include "eeprom_wl_vol_cfg.h"
+
+#ifndef EEPROM_SIMULATD_SIZE
+#define EEPROM_SIMULATED_SIZE  (HAL_LIB_CFG_EEPROM_SIMULATED_SIZE)
+#else
+#define EEPROM_SIMULATED_SIZE  (1024)
+#endif
+
+
+typedef enum eeprom_wl_volume_e {eeprom_wl_volume0, eeprom_wl_volume1, eeprom_wl_volume2, eeprom_wl_volume3} eeprom_wl_volume_t;
+
+//Volume 0 config
+#ifdef HAL_LIB_CFG_EEPROM_WL_VOLUME0
+	#define EEPROM_WL_VOLUME0			(HAL_LIB_CFG_EEPROM_WL_VOLUME0)
+	#define EEPROM_WL_VOLUME0_SIZE		(HAL_LIB_CFG_EEPROM_WL_VOLUME0_SIZE)
+	#define EEPROM_WL_VOLUME0_WL_FACTOR (HAL_LIB_CFG_EEPROM_WL_VOLUME0_WL_FACTOR)
+#else
+	#define EEPROM_WL_VOLUME0			(0U)
+	#define EEPROM_WL_VOLUME0_SIZE		(256U)
+	#define EEPROM_WL_VOLUME0_WL_FACTOR (1U)
+#endif
+#define EEPROM_WL_VOLUME0_END			  (EEPROM_WL_VOLUME0+(EEPROM_WL_VOLUME0_SIZE - 1))
+#define EE_WL_VOLUME0_PARAM_BUFFER_SIZE   (EEPROM_WL_VOLUME0_WL_FACTOR)
+#define EE_WL_VOLUME0_STATUS_BUFFER_SIZE  (EE_WL_VOLUME0_PARAM_BUFFER_SIZE)
+
+//Volume 1 config
+#ifdef HAL_LIB_CFG_EEPROM_WL_VOLUME1
+	#define EEPROM_WL_VOLUME1			(HAL_LIB_CFG_EEPROM_WL_VOLUME1)
+	#define EEPROM_WL_VOLUME1_SIZE		(HAL_LIB_CFG_EEPROM_WL_VOLUME1_SIZE)
+	#define EEPROM_WL_VOLUME1_WL_FACTOR (HAL_LIB_CFG_EEPROM_WL_VOLUME1_WL_FACTOR)
+#else
+	#define EEPROM_WL_VOLUME1			(256U)
+	#define EEPROM_WL_VOLUME1_SIZE		(256U)
+	#define EEPROM_WL_VOLUME1_WL_FACTOR (2U)
+#endif
+#define EEPROM_WL_VOLUM1_END			 (EEPROM_WL_VOLUME1+(EEPROM_WL_VOLUME1_SIZE - 1))
+#define EE_WL_VOLUME1_PARAM_BUFFER_SIZE  (EEPROM_WL_VOLUME1_WL_FACTOR)
+#define EE_WL_VOLUME1_STATUS_BUFFER_SIZE (EE_WL_VOLUME1_PARAM_BUFFER_SIZE)
+
+//Volume 2 config
+#ifdef HAL_LIB_CFG_EEPROM_WL_VOLUME2
+	#define EEPROM_WL_VOLUME2			(HAL_LIB_CFG_EEPROM_WL_VOLUME2)
+	#define EEPROM_WL_VOLUME2_SIZE		(HAL_LIB_CFG_EEPROM_WL_VOLUME2_SIZE)
+	#define EEPROM_WL_VOLUME2_WL_FACTOR (HAL_LIB_CFG_EEPROM_WL_VOLUME2_WL_FACTOR)
+#else
+	#define EEPROM_WL_VOLUME2			(512U)
+	#define EEPROM_WL_VOLUME2_SIZE		(256U)
+	#define EEPROM_WL_VOLUME2_WL_FACTOR (4U)
+#endif
+#define EEPROM_WL_VOLUM2_END			 (EEPROM_WL_VOLUME2+(EEPROM_WL_VOLUME2_SIZE - 1))
+#define EE_WL_VOLUME2_PARAM_BUFFER_SIZE  (EEPROM_WL_VOLUME2_WL_FACTOR)
+#define EE_WL_VOLUME2_STATUS_BUFFER_SIZE (EE_WL_VOLUME2_PARAM_BUFFER_SIZE)
+
+//Volume 3 config
+#ifdef HAL_LIB_CFG_EEPROM_WL_VOLUME3
+	#define EEPROM_WL_VOLUME3			(HAL_LIB_CFG_EEPROM_WL_VOLUME3)
+	#define EEPROM_WL_VOLUME3_SIZE		(HAL_LIB_CFG_EEPROM_WL_VOLUME3_SIZE)
+	#define EEPROM_WL_VOLUME3_WL_FACTOR (HAL_LIB_CFG_EEPROM_WL_VOLUME3_WL_FACTOR)
+#else
+	#define EEPROM_WL_VOLUME3			(768U)
+	#define EEPROM_WL_VOLUME3_SIZE		(256U)
+	#define EEPROM_WL_VOLUME3_WL_FACTOR (8U)
+#endif
+#define EEPROM_WL_VOLUM3_END			 (EEPROM_WL_VOLUME2+(EEPROM_WL_VOLUME3_SIZE - 1))
+#define EE_WL_VOLUME3_PARAM_BUFFER_SIZE  (EEPROM_WL_VOLUME3_WL_FACTOR)
+#define EE_WL_VOLUME3_STATUS_BUFFER_SIZE (EE_WL_VOLUME3_PARAM_BUFFER_SIZE)
+
+
+
 /*
  * This library is intended to be compiled for an AVR microcontroller,
  * but for debugging purposes, it may also be compiled on a computer,
@@ -82,10 +153,9 @@ _Static_assert((EE_EEPROM_END <= sizeof(eeprom)), "Available EEPROM memory excee
  *   The location one after the last location of the simulated EEPROM
  *   to be printed.
  */
-void EEPROM_Print(const uint16_t begin, const uint16_t end);
+void EEPROM_Print(eeprom_wl_volume_t volume, const uint16_t begin, const uint16_t end);
 #endif // F_CPU
 
-#if (EEPROM_INCLUDE_BYTE_FUNCS)
 /*
  * EEPROM_InitWearLeveledByte
  *
@@ -109,7 +179,7 @@ void EEPROM_Print(const uint16_t begin, const uint16_t end);
  * byte from EEPROM into memory, and EEPROM_WriteWearLeveledByte to
  * write a new byte from memory into EEPROM.
  */
-uint8_t EEPROM_InitWearLeveledByte(const uint16_t param, const uint8_t data);
+uint8_t EEPROM_InitWearLeveledByte(eeprom_wl_volume_t volume, const uint16_t param, const uint8_t data);
 
 /*
  * EEPROM_ReadWearLeveledByte
@@ -126,7 +196,7 @@ uint8_t EEPROM_InitWearLeveledByte(const uint16_t param, const uint8_t data);
  * This function may only be invoked if EEPROM_InitWearLeveledByte has
  * previously been invoked on the same segment of EEPROM.
  */
-uint8_t EEPROM_ReadWearLeveledByte(const uint16_t param);
+uint8_t EEPROM_ReadWearLeveledByte(eeprom_wl_volume_t volume, const uint16_t param);
 
 /*
  * EEPROM_WriteWearLeveledByte
@@ -142,10 +212,8 @@ uint8_t EEPROM_ReadWearLeveledByte(const uint16_t param);
  * This function may only be invoked if EEPROM_InitWearLeveledByte
  * has previously been invoked on the same segment of EEPROM.
  */
-void EEPROM_WriteWearLeveledByte(const uint16_t param, const uint8_t data);
-#endif // EEPROM_INCLUDE_BYTE_FUNCS
+void EEPROM_WriteWearLeveledByte(eeprom_wl_volume_t volume, const uint16_t param, const uint8_t data);
 
-#if (EEPROM_INCLUDE_BLOCK_FUNCS)
 /*
  * EEPROM_InitWearLeveledBlock
  *
@@ -170,7 +238,7 @@ void EEPROM_WriteWearLeveledByte(const uint16_t param, const uint8_t data);
  * block from EEPROM into memory, and EEPROM_WriteWearLeveledBlock to
  * write a new block from memory into EEPROM.
  */
-void EEPROM_InitWearLeveledBlock(const uint16_t param, const void *data, const uint16_t len);
+void EEPROM_InitWearLeveledBlock(eeprom_wl_volume_t volume, const uint16_t param, const void *data, const uint16_t len);
 
 /*
  * EEPROM_ReadWearLeveledBlock
@@ -191,7 +259,7 @@ void EEPROM_InitWearLeveledBlock(const uint16_t param, const void *data, const u
  * This function may only be invoked if EEPROM_InitWearLeveledBlock
  * has previously been invoked on the same segment of EEPROM.
  */
-void EEPROM_ReadWearLeveledBlock(const uint16_t param, void *data, const uint16_t len);
+void EEPROM_ReadWearLeveledBlock(eeprom_wl_volume_t volume, const uint16_t param, void *data, const uint16_t len);
 
 /*
  * EEPROM_WriteWearLeveledBlock
@@ -211,5 +279,5 @@ void EEPROM_ReadWearLeveledBlock(const uint16_t param, void *data, const uint16_
  * This function may only be invoked if EEPROM_InitWearLeveledBlock
  * has previously been invoked on the same segment of EEPROM.
  */
-void EEPROM_WriteWearLeveledBlock(const uint16_t param, const void *data, const uint16_t len);
-#endif // EEPROM_INCLUDE_BLOCK_FUNCS
+void EEPROM_WriteWearLeveledBlock(eeprom_wl_volume_t volume, const uint16_t param, const void *data, const uint16_t len);
+#endif // __EEPROM_WL_VOL_H__
